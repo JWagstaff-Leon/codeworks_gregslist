@@ -161,6 +161,7 @@ export class ListingsController
             }
 
             bootstrap.Modal.getOrCreateInstance(document.getElementById("new-listing-modal")).hide();
+            form.reset();
         }
         catch(error)
         {
