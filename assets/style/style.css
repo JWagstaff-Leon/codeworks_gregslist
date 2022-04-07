@@ -1,0 +1,36 @@
+/* BASIC STYLES HERE */
+.fab
+{
+    position: fixed;
+    bottom: 3vh;
+    right: 3vh;
+    height: 6vh;
+    width: 6vh;
+}
+
+.car-listing img
+{
+    max-height: 25vh;
+    object-fit: cover;
+}
+
+.house-listing
+{
+    max-height: 30vh;
+}
+
+.house-image
+{
+    filter: blur(1.5px);
+}
+
+.house-text-box
+{
+    border-radius: 5px;
+    background-color: rgba(30, 30, 30, 0.6);
+}
+
+.job-listing>.card
+{
+    min-height: 20vh;
+}

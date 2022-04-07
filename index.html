@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="icon" href="https://bcw.blob.core.windows.net/public/img/9977764104160066">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/style/main.css">
+  <link rel="stylesheet" href="assets/style/style.css">
+  <title>Gregs'List (w3d3)</title>
+</head>
+
+<body>
+    <button class="btn btn-primary fab rounded-circle" data-bs-toggle="modal" data-bs-target="#new-listing-modal" title="Create Listing">➕</button>
+
+  <header class="sticky-top">
+    <nav class="navbar navbar-dark navbar-expand bg-dark text-light no-select">
+      <a class="navbar-brand ms-3" data-bs-toggle="offcanvas" data-bs-target="#listings-menu">
+        <img src="https://codeworks.blob.core.windows.net/public/assets/img/cw-mark.png" height="45" alt=""
+          loading="lazy">
+        <span class="ms-2">Gregs'List<span id="title-suffix"></span></span>
+      </a>
+    </nav>
+  </header>
+
+<main>
+    <div class="container-fluid">
+        <div class="row">
+           <div class="col-12">
+               <div class="row" id="listings">
+                    <!-- Listings will show up here -->
+                    <!-- TODO add splash text here -->
+                    <!-- listings end here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals begin here -->
+
+    <!-- Nav Offcanvas -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="listings-menu">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Gregs'List</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="list-group list-group-flush">
+                <button class="list-group-item list-group-item-action" onclick="app.listingsController.swtichListingsTo('cars')">Afforable Cars</button>
+                <button class="list-group-item list-group-item-action" onclick="app.listingsController.swtichListingsTo('houses')">Modern Homes</button>
+                <button class="list-group-item list-group-item-action" onclick="app.listingsController.swtichListingsTo('jobs')">Competitive Jobs</button>
+            </ul>
+        </div>
+    </div>
+
+    <!-- New Listing Modal -->
+    <div class="modal fade" tabindex="-1" id="new-listing-modal">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="new-listing-title">New Listing</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="new-listing-form"></div>
+          </div>
+        </div>
+      </div>
+      
+
+    <!-- Modals end here -->
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.10/dist/sweetalert2.all.min.js"
+    integrity="sha256-hw7v8jZF/rFEdx1ZHepT4D73AFTHLu/P9kEyrNesRyc=" crossorigin="anonymous"></script>
+  <script src="app/main.js" type="module"></script>
+</body>
+
+</html>
