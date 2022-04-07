@@ -3,7 +3,6 @@ import { isValidProp } from "./Utils/isValidProp.js"
 import { getCarForm } from "./components/CarForm.js";
 import { getHouseForm } from "./components/HouseForm.js";
 import { getJobForm } from "./components/JobForm.js";
-*/
 
 class AppState extends EventEmitter
 {
