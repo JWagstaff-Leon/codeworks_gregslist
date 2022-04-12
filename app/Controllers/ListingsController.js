@@ -1,8 +1,9 @@
 import { ProxyState } from "../AppState.js";
 import { carsService } from "../Services/CarsService.js";
 import { housesService } from "../Services/HousesService.js";
-import { jobsService } from "../Services/JobsServcie.js";
+import { jobsService } from "../Services/JobsService.js";
 import { listingsService } from "../Services/ListingsService.js";
+import { Pop } from "../Utils/Pop.js";
 
 function _drawListings()
 {
@@ -29,9 +30,8 @@ function _getCarsFormDetails(form)
             price: form.price.value,
             year: form.year.value,
             color: form.color.value,
-            miles: form.miles.value,
             description: form.description.value,
-            image: form.image.value
+            imgUrl: form.imgUrl.value
         };
 
         carsService.addCar(newCarData);
@@ -48,20 +48,12 @@ function _getHousesFormDetails(form)
     {
         const newHouseData =
         {
-            address:
-            {
-                number: form.number.value,
-                street: form.street.value,
-                city: form.city.value,
-                state: form.state.value
-            },
-            squareFootage: form.squareFootage.value,
-            fullBaths: form.fullBaths.value,
-            halfBaths: form.halfBaths.value,
+            year: form.year.value,
+            bathrooms: form.bathrooms.value,
             bedrooms: form.bedrooms.value,
-            floors: form.floors.value,
+            levels: form.levels.value,
             price: form.price.value,
-            image: form.image.value,
+            imgUrl: form.imgUrl.value,
             description: form.description.value
         };
 
@@ -79,35 +71,41 @@ function  _getJobsFormDetails(form)
     {
         const newJobData =
         {
-            title: form.title.value,
-            salary: form.salary.value,
-            address:
-            {
-                number: form.number.value,
-                street: form.street.value,
-                city: form.city.value,
-                state: form.state.value
-            },
-            startHour: form.startHour.value,
-            endHour: form.endHour.value,
-            daysWorked: 
-            {
-                monday: form.monday.checked,
-                tuesday: form.tuesday.checked,
-                wednesday: form.wednesday.checked,
-                thursday: form.thursday.checked,
-                friday: form.friday.checked,
-                saturday: form.saturday.checked,
-                sunday: form.sunday.checked
-            },
+            jobTitle: form.jobTitle.value,
+            rate: form.rate.value,
+            hours: form.hours.value,
             description: form.description.value,
-            companyName: form.companyName.value
+            company: form.company.value
         };
 
         jobsService.addJob(newJobData);
     }
     catch(error)
     {
+        console.error(error.message);
+    }
+}
+
+function _getAllListings(listingType)
+{
+    try
+    {
+        switch(listingType)
+        {
+            case "cars":
+                carsService.getAllCars();
+                break;
+            case "houses":
+                housesService.getAllHouses();
+                break;
+            case "jobs":
+                jobsService.getAllJobs();
+                break;
+        }
+    }
+    catch(error)
+    {
+        Pop.toast(error.message, "error");
         console.error(error.message);
     }
 }
@@ -119,6 +117,11 @@ export class ListingsController
         ProxyState.on("currentListingType", _drawListings);
         ProxyState.on("listingTypes", _drawListings);
         ProxyState.on("currentListingType", _drawListingsType);
+
+        for(let key in ProxyState.listingTypes)
+        {
+            _getAllListings(key);
+        }
 
         _drawListings();
         _drawListingsType();
@@ -137,7 +140,7 @@ export class ListingsController
         }
     }
 
-    addListing()
+    submitForm()
     {
         try
         {

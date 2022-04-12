@@ -6,22 +6,32 @@
     right: 3vh;
     height: 6vh;
     width: 6vh;
+
+    z-index: 1;
+
+    border: 2px solid #00000060;
+}
+
+.car-listing
+{
+    height: 45vh;
 }
 
 .car-listing img
 {
-    max-height: 25vh;
+    height: 25vh;
     object-fit: cover;
 }
 
 .house-listing
 {
-    max-height: 30vh;
+    height: 30vh;
 }
 
 .house-image
 {
-    filter: blur(1.5px);
+    filter: blur(0.8px);
+    object-fit: cover;
 }
 
 .house-text-box
