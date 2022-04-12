@@ -20,6 +20,15 @@ class CarsService
         ProxyState.listingTypes.cars.listings = carsListings;
         ProxyState.listingTypes = ProxyState.listingTypes;
     }
+
+    async editCar(carData, id)
+    {
+        const res = await apiService.put("cars/" + id, carData);
+        const editedCar = new Car(res.data);
+        const index = ProxyState.listingTypes.cars.listings.findIndex(car => car.id === editedCar.id);
+        ProxyState.listingTypes.cars.listings.splice(index, 1, editedCar);
+        ProxyState.listingTypes = ProxyState.listingTypes;
+    }
 }
 
 export const carsService = new CarsService();

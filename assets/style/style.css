@@ -14,13 +14,23 @@
 
 .car-listing
 {
-    height: 45vh;
+    max-height: 65vh;
+}
+
+.car-listing .card
+{
+    height: 100%;
 }
 
 .car-listing img
 {
     height: 25vh;
     object-fit: cover;
+}
+
+.car-listing .car-text
+{
+    overflow-y: auto;
 }
 
 .house-listing

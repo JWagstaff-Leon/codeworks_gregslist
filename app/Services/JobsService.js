@@ -20,6 +20,15 @@ class JobsService
         ProxyState.listingTypes.jobs.listings = jobsListings;
         ProxyState.listingTypes = ProxyState.listingTypes;
     }
+
+    async editJob(jobData, id)
+    {
+        const res = await apiService.put("jobs/" + id, jobData);
+        const editedJob = new Job(res.data);
+        const index = ProxyState.listingTypes.jobs.listings.findIndex(job => job.id === editedJob.id);
+        ProxyState.listingTypes.jobs.listings.splice(index, 1, editedJob);
+        ProxyState.listingTypes = ProxyState.listingTypes;
+    }
 }
 
 export const jobsService = new JobsService();

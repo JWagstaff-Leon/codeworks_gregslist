@@ -20,6 +20,15 @@ class HousesService
         ProxyState.listingTypes.houses.listings = housesListings;
         ProxyState.listingTypes = ProxyState.listingTypes;
     }
+
+    async editHouse(houseData, id)
+    {
+        const res = await apiService.put("houses/" + id, houseData);
+        const editedHouse = new House(res.data);
+        const index = ProxyState.listingTypes.houses.listings.findIndex(house => house.id === editedHouse.id);
+        ProxyState.listingTypes.houses.listings.splice(index, 1, editedHouse);
+        ProxyState.listingTypes = ProxyState.listingTypes;
+    }
 }
 
 export const housesService = new HousesService();

@@ -19,7 +19,7 @@ function _drawListingsType()
     document.getElementById("title-suffix").innerText = ` - ${ProxyState.currentListingType}`;
 }
 
-function _getCarsFormDetails(form)
+function _getCarsFormDetails(form, id = undefined)
 {
     try
     {
@@ -34,7 +34,14 @@ function _getCarsFormDetails(form)
             imgUrl: form.imgUrl.value
         };
 
-        carsService.addCar(newCarData);
+        if(id)
+        {
+            carsService.editCar(newCarData, id);
+        }
+        else
+        {
+            carsService.addCar(newCarData);
+        }
     }
     catch(error)
     {
@@ -42,7 +49,7 @@ function _getCarsFormDetails(form)
     }
 }
 
-function _getHousesFormDetails(form)
+function _getHousesFormDetails(form, id = undefined)
 {
     try
     {
@@ -57,7 +64,14 @@ function _getHousesFormDetails(form)
             description: form.description.value
         };
 
-        housesService.addHouse(newHouseData);
+        if(id)
+        {
+            housesService.editHouse(newHouseData, id);
+        }
+        else
+        {
+            housesService.addHouse(newHouseData);
+        }
     }
     catch(error)
     {
@@ -65,7 +79,7 @@ function _getHousesFormDetails(form)
     }
 }
 
-function  _getJobsFormDetails(form)
+function  _getJobsFormDetails(form, id = undefined)
 {
     try
     {
@@ -78,7 +92,14 @@ function  _getJobsFormDetails(form)
             company: form.company.value
         };
 
-        jobsService.addJob(newJobData);
+        if(id)
+        {
+            jobsService.editJob(newJobData, id);
+        }
+        else
+        {
+            jobsService.addJob(newJobData);
+        }
     }
     catch(error)
     {
@@ -140,7 +161,19 @@ export class ListingsController
         }
     }
 
-    submitForm()
+    resetForm()
+    {
+        document.getElementById("new-listing-form").innerHTML = ProxyState.listingTypes[ProxyState.currentListingType].form();
+    }
+
+    openEditor(id)
+    {
+        const listing = ProxyState.listingTypes[ProxyState.currentListingType].listings.find(l => l.id === id);
+        document.getElementById("new-listing-form").innerHTML = ProxyState.listingTypes[ProxyState.currentListingType].form(listing);
+        bootstrap.Modal.getOrCreateInstance(document.getElementById("new-listing-modal")).show();
+    }
+
+    submitForm(id)
     {
         try
         {
@@ -151,15 +184,15 @@ export class ListingsController
             switch(ProxyState.currentListingType)
             {
                 case 'cars':
-                    _getCarsFormDetails(form);
+                    _getCarsFormDetails(form, id);
                     break;
 
                 case 'houses':
-                    _getHousesFormDetails(form);
+                    _getHousesFormDetails(form, id);
                     break;
 
                 case 'jobs':
-                    _getJobsFormDetails(form);
+                    _getJobsFormDetails(form, id);
                     break;
             }
 

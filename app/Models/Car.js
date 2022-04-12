@@ -2,17 +2,17 @@ import { ListingType } from "./ListingType.js";
 
 export class Car extends ListingType
 {
-    constructor( { make, model, year, price, color, description, imgUrl } )
+    constructor( { id, make, model, year, price, color, description, imgUrl } )
     {
         super();
 
-        this.id
+        this.id = id
         this.make = make || "";
         this.model = model || "";
         this.price = price || "";
         this.year = year || 0;
         this.color = color || "#808080";
-        this.description = description || "No description given.";
+        this.description = description || "";
         this.imgUrl = imgUrl || "";
     }
 
@@ -26,6 +26,9 @@ export class Car extends ListingType
                     <h4 class="card-title">${this.year} ${this.make} ${this.model}</h4>
                     <h5 class="card-subtitle">$${this.price}</h5>
                     <div class="card-text">${this.description}</div>
+                    <div>
+                        <i class="mdi mdi-pencil selectable" onclick="app.listingsController.openEditor('${this.id}')"></i>
+                    </div>
                 </div>
             </div>
         </div>`;

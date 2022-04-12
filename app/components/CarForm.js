@@ -43,7 +43,7 @@ export function getCarForm(car = new Car({}))
         <div>
           <label for="description" class="form-label">Description</label>
           <textarea type="text" class="form-control" name="description" id="description"
-            aria-describedby="description" placeholder="Description..." min="5" max="250" required>${car.description}</textarea>
+            aria-describedby="description" placeholder="No description given." min="5" max="250" required>${car.description}</textarea>
         </div>
       </div>
       <div class="modal-footer">
