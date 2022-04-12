@@ -29,6 +29,13 @@ class CarsService
         ProxyState.listingTypes.cars.listings.splice(index, 1, editedCar);
         ProxyState.listingTypes = ProxyState.listingTypes;
     }
+
+    async deleteCar(id)
+    {
+        const res = await apiService.delete("cars/" + id);
+        ProxyState.listingTypes.cars.listings = ProxyState.listingTypes.cars.listings.filter(car => car.id != id);
+        ProxyState.listingTypes = ProxyState.listingTypes;
+    }
 }
 
 export const carsService = new CarsService();

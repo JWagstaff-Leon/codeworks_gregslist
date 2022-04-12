@@ -29,6 +29,13 @@ class HousesService
         ProxyState.listingTypes.houses.listings.splice(index, 1, editedHouse);
         ProxyState.listingTypes = ProxyState.listingTypes;
     }
+
+    async deleteHouse(id)
+    {
+        const res = await apiService.delete("houses/" + id);
+        ProxyState.listingTypes.houses.listings = ProxyState.listingTypes.houses.listings.filter(house => house.id != id);
+        ProxyState.listingTypes = ProxyState.listingTypes;
+    }
 }
 
 export const housesService = new HousesService();

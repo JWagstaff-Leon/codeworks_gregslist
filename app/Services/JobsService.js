@@ -29,6 +29,13 @@ class JobsService
         ProxyState.listingTypes.jobs.listings.splice(index, 1, editedJob);
         ProxyState.listingTypes = ProxyState.listingTypes;
     }
+
+    async deleteJob(id)
+    {
+        const res = await apiService.delete("jobs/" + id);
+        ProxyState.listingTypes.jobs.listings = ProxyState.listingTypes.jobs.listings.filter(job => job.id != id);
+        ProxyState.listingTypes = ProxyState.listingTypes;
+    }
 }
 
 export const jobsService = new JobsService();

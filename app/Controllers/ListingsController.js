@@ -34,7 +34,7 @@ function _getCarsFormDetails(form, id = undefined)
             imgUrl: form.imgUrl.value
         };
 
-        if(id)
+        if(id != "undefined")
         {
             carsService.editCar(newCarData, id);
         }
@@ -64,7 +64,7 @@ function _getHousesFormDetails(form, id = undefined)
             description: form.description.value
         };
 
-        if(id)
+        if(id != "undefined")
         {
             housesService.editHouse(newHouseData, id);
         }
@@ -92,7 +92,7 @@ function  _getJobsFormDetails(form, id = undefined)
             company: form.company.value
         };
 
-        if(id)
+        if(id != "undefined")
         {
             jobsService.editJob(newJobData, id);
         }
@@ -157,7 +157,7 @@ export class ListingsController
         }
         catch(error)
         {
-            console.error(error.message);
+            console.error("[SWITCH LISTINGS ERROR]",error.message);
         }
     }
 
@@ -201,7 +201,36 @@ export class ListingsController
         }
         catch(error)
         {
-            console.error(error.message);
+            console.error("[SUBMIT FORM ERROR]", error.message);
+        }
+    }
+
+    async deleteListing(id)
+    {
+        try
+        {
+            if(await Pop.confirm("Delete Listing?", "This cannot be undone", "warning", "Delete It"))
+            {
+                switch(ProxyState.currentListingType)
+                {
+                    case 'cars':
+                        carsService.deleteCar(id);
+                        break;
+
+                    case 'houses':
+                        housesService.deleteHouse(id);
+                        break;
+
+                    case 'jobs':
+                        jobsService.deleteJob(id);
+                        break;
+                }
+            }
+        }
+        catch(error)
+        {
+            Pop.toast(error.message, "error");
+            console.error("[DELETE LISTING ERROR]", error.message);
         }
     }
 }

@@ -26,8 +26,9 @@ export class Car extends ListingType
                     <h4 class="card-title">${this.year} ${this.make} ${this.model}</h4>
                     <h5 class="card-subtitle">$${this.price}</h5>
                     <div class="card-text">${this.description}</div>
-                    <div>
+                    <div class="d-flex justify-content-between">
                         <i class="mdi mdi-pencil selectable" onclick="app.listingsController.openEditor('${this.id}')"></i>
+                        <i class="mdi mdi-delete selectable" onclick="app.listingsController.deleteListing('${this.id}')"></i>
                     </div>
                 </div>
             </div>

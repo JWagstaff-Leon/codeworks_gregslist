@@ -24,8 +24,9 @@ export class House extends ListingType
                 <img src="${this.imgUrl}" class="card-img-top house-image h-100">
                 <div class="card-img-overlay text-light d-flex align-items-end">
                     <div class="house-text-box p-2">
-                        <div>
+                        <div class="d-flex justify-content-between">
                             <i class="mdi mdi-pencil selectable" onclick="app.listingsController.openEditor('${this.id}')"></i>
+                            <i class="mdi mdi-delete selectable" onclick="app.listingsController.deleteListing('${this.id}')"></i>
                         </div>
                         <h4 class="card-title">${this.levels} ${this.levels == 1 ? "floor" : "floors"} house built in ${this.year}</h4>
                         <h5 class="card-subtitle">${this.bedrooms}bd ${+this.bathrooms}ba for $${Math.ceil(this.price / 1000)}k</h5>
